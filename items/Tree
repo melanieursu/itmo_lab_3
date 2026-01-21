@@ -1,0 +1,19 @@
+package items;
+
+import java.util.Random;
+
+public record Tree(String type, boolean isVeryHard, boolean hasKnots, boolean isHardwood) {
+
+    public String chopWithAxe(Axe axe) throws ToolConditionException {
+        return axe.chopTree(this);
+    }
+
+    public boolean isHardToChop() {
+        return isVeryHard || isHardwood;
+    }
+
+    public static Tree randomTree(String name) {
+        Random r = new Random();
+        return new Tree(name, r.nextBoolean(), r.nextBoolean(), r.nextBoolean());
+    }
+}
