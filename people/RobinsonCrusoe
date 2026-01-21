@@ -1,0 +1,49 @@
+package people;
+
+import enums.HandStatus;
+import items.*;
+
+import java.util.ArrayList;
+
+public class RobinsonCrusoe {
+    public String name = "Робинзон Крузо";
+    public int mentalEnergy = 0;
+
+    public ArrayList<Axe> bigAxes = new ArrayList<>();
+    public ArrayList<Axe> smallTradeAxes = new ArrayList<>();
+    public Grindstone grindstone;
+
+    public HandStatus handsStatus = HandStatus.BOTH_FREE;
+    public boolean canUseBothHands = true;
+    public int availableHands = 2;
+
+    public FootOperatedMechanism solution;
+
+    public String thinkAboutHandsProblem() {
+        mentalEnergy += 10;
+        return "22-е апреля. На следующее утро я начал думать, как осуществить свою мысль. Главная трудность — руки заняты.";
+    }
+
+    public String thinkAboutProblem() {
+        mentalEnergy += 15;
+        return "Однако я не могу одновременно вращать камень и точить. Нужно приспособление, в котором можно использовать ноги.";
+    }
+
+    public String realizeGrindstoneProblem() {
+        mentalEnergy += 20;
+        return "Наконец мне удалось придумать колесо с ремнем: точило приводится ногой, а руки свободны.";
+    }
+
+    public FootOperatedMechanism buildFootOperatedMechanism() {
+        mentalEnergy += 25;
+        return new FootOperatedMechanism(grindstone);
+    }
+
+    public String useTool(Tool tool) throws ToolConditionException {
+        return tool.use();
+    }
+
+    public int getMentalEnergySpent() {
+        return mentalEnergy;
+    }
+}
