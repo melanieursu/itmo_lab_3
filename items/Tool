@@ -1,0 +1,48 @@
+package items;
+
+import enums.SizeWeight;
+import enums.ToolCondition;
+
+import java.util.Objects;
+
+public abstract class Tool extends Usable {
+    protected String name;
+    protected ToolCondition condition;
+    protected ToolSpecification specification;
+    public SizeWeight sizeWeight;
+
+    protected Tool(String name, ToolCondition condition, ToolSpecification specification, SizeWeight sizeWeight) {
+        this.name = name;
+        this.condition = condition;
+        this.specification = specification;
+        this.sizeWeight = sizeWeight;
+    }
+
+    public String getName() { return name; }
+    public ToolCondition getCondition() { return condition; }
+    public void setCondition(ToolCondition condition) { this.condition = condition; }
+
+    public abstract String performAction();
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() +
+                "{name='" + name + "', condition=" + condition + ", sizeWeight=" + sizeWeight + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tool tool = (Tool) o;
+        return Objects.equals(name, tool.name)
+                && condition == tool.condition
+                && Objects.equals(specification, tool.specification)
+                && sizeWeight == tool.sizeWeight;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, condition, specification, sizeWeight);
+    }
+}
