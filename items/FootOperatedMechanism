@@ -1,0 +1,30 @@
+package items;
+
+public class FootOperatedMechanism {
+    public final Grindstone grindstone;
+    public boolean hasWheel;
+    public boolean hasBelt;
+    public int constructionDays = 7;
+    public int handsNowRequired = 0;
+    public int handsFree = 2;
+    public boolean leaveBothHandsFree;
+    public String handStatusAfterUse;
+
+    public FootOperatedMechanism(Grindstone grindstone) {
+        this.grindstone = grindstone;
+        this.hasWheel = true;
+        this.hasBelt = true;
+        this.leaveBothHandsFree = true;
+        this.handStatusAfterUse = "BOTH_FREE";
+    }
+
+    public String operateWithFoot() {
+        grindstone.rotationSpeed = 180;
+        grindstone.canBeRotatedByHand = true;
+        return "Привожу точило в движение ногой (rpm=" + grindstone.rotationSpeed + "), руки свободны.";
+    }
+
+    public boolean canUseHandForOtherTask(String handName) {
+        return leaveBothHandsFree;
+    }
+}
