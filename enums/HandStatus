@@ -1,0 +1,5 @@
+package enums;
+
+public enum HandStatus {
+    BOTH_FREE, ONE_BUSY, BOTH_BUSY
+}
