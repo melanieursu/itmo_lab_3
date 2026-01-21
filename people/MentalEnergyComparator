@@ -1,0 +1,17 @@
+package people;
+
+public class MentalEnergyComparator {
+    public String compare(RobinsonCrusoe r, Statesman s) {
+        int robinsonEnergy = r.getMentalEnergySpent();
+        int statesmanEnergy = s.getMentalEnergySpent();
+
+        if (robinsonEnergy > statesmanEnergy) {
+            return "Робинзон потратил больше умственной энергии (" + robinsonEnergy +
+                    "), чем государственный муж (" + statesmanEnergy + ").";
+        } else if (robinsonEnergy < statesmanEnergy) {
+            return "Государственный муж потратил больше умственной энергии (" + statesmanEnergy +
+                    "), чем Робинзон (" + robinsonEnergy + ").";
+        }
+        return "Оба потратили одинаково умственной энергии: " + robinsonEnergy + ".";
+    }
+}
