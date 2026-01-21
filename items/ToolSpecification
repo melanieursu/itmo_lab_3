@@ -1,0 +1,6 @@
+package items;
+
+import enums.AxeType;
+import enums.SizeWeight;
+
+public record ToolSpecification(String name, AxeType axeType, SizeWeight sizeWeight, String description) { }
