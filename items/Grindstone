@@ -1,0 +1,52 @@
+package items;
+
+import enums.SizeWeight;
+import enums.ToolCondition;
+
+public class Grindstone extends Tool {
+    public boolean canBeRotatedByHand;
+    public int rotationSpeed;
+
+    public Grindstone(SizeWeight sizeWeight) {
+        super(
+                "Точильный камень",
+                ToolCondition.SHARP,
+                new ToolSpecification("Точильный камень", null, sizeWeight, "Тяжёлое точило"),
+                sizeWeight
+        );
+        this.canBeRotatedByHand = false;
+        this.rotationSpeed = 0;
+    }
+
+    public String rotate() {
+        if (!canBeRotatedByHand) {
+            throw new IllegalStateException("Не могу вращать точило руками, т.к. оно слишком велико и тяжело.");
+        }
+        rotationSpeed = 60;
+        return "Вращаю точильный камень руками. Скорость:" + rotationSpeed;
+    }
+
+    public String sharpenAxe(Axe axe) throws ToolConditionException {
+        if (axe.getCondition() == ToolCondition.BROKEN) {
+            throw new ToolConditionException("Нельзя точить, т.к. топор сломан", axe.getName(), axe.getCondition());
+        }
+        axe.setCondition(ToolCondition.SHARP);
+        axe.hasNotches = false;
+        return "Точильный камень затачивает '" + axe.getName() + "'. Теперь состояние: " + axe.getCondition();
+    }
+
+    @Override
+    public String performAction() {
+        return "Точильный камень выполняет заточку";
+    }
+
+    @Override
+    public String use() {
+        return "Использую точильный камень (rpm=" + rotationSpeed + ")";
+    }
+
+    @Override
+    public boolean canBeUsedWithOneHand() {
+        return false;
+    }
+}
