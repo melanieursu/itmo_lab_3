@@ -1,0 +1,16 @@
+package people;
+
+public class Statesman {
+    public String name = "Государственный муж";
+    public String position = "чиновник";
+    public int mentalEnergy = 0;
+
+    public String thinkAboutPoliticalQuestion(String question) {
+        mentalEnergy += 12;
+        return name + " размышляет над политическим вопросом: '" + question + "'";
+    }
+
+    public int getMentalEnergySpent() {
+        return mentalEnergy;
+    }
+}
