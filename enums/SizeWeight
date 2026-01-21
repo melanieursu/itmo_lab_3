@@ -1,0 +1,5 @@
+package enums;
+
+public enum SizeWeight {
+    LARGE_and_HEAVY
+}
