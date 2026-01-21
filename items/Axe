@@ -1,0 +1,83 @@
+package items;
+
+import enums.AxeType;
+import enums.SizeWeight;
+import enums.ToolCondition;
+
+import java.util.ArrayList;
+
+public class Axe extends Tool {
+    public final AxeType type;
+    public boolean hasNotches;
+    public final ArrayList<String> usageLog = new ArrayList<>();
+
+    public Axe(String name, AxeType type, ToolCondition condition) {
+        super(
+                name,
+                condition,
+                new ToolSpecification(name, type, SizeWeight.LARGE_and_HEAVY, "Топор" + type),
+                SizeWeight.LARGE_and_HEAVY
+        );
+        this.type = type;
+        this.hasNotches = condition == ToolCondition.NOTCHED;
+    }
+
+    public String chopTree(Tree tree) throws ToolConditionException {
+        if (condition == ToolCondition.BROKEN) {
+            throw new ToolConditionException("Нельзя рубить, т.к. топор сломан", name, condition);
+        }
+        if (condition == ToolCondition.DULL || condition == ToolCondition.NOTCHED) {
+            throw new ToolConditionException("Не порубить, т.к. топор в плохом состоянии", name, condition);
+        }
+
+        if (tree.isHardToChop()) {
+            condition = ToolCondition.DULL;
+        }
+        if (tree.hasKnots()) {
+            condition = ToolCondition.NOTCHED;
+            hasNotches = true;
+        }
+
+        String msg = "Топор" + name + "рубит" + tree.type() +
+                " (hard=" + tree.isVeryHard() + ", knots=" + tree.hasKnots() + ")";
+        usageLog.add(msg + " -> состояние стало " + condition);
+        return msg + " -> состояние: " + condition;
+    }
+
+    public boolean isForTradeWithIndians() {
+        return type == AxeType.SMALL;
+    }
+
+    @Override
+    public String performAction() {
+        return "Топор выполняет рубку";
+    }
+
+    @Override
+    public String use() throws ToolConditionException {
+        if (condition == ToolCondition.BROKEN) {
+            throw new ToolConditionException("Нельзя использовать, т.к. сломан", name, condition);
+        }
+        return "Использую топор" + name + "(" + condition + ")";
+    }
+
+    @Override
+    public boolean canBeUsedWithOneHand() {
+        return true;
+    }
+
+    public static ArrayList<Axe> createThreeBigAxes() {
+        ArrayList<Axe> axes = new ArrayList<>();
+        axes.add(new Axe("Большой топор №1", AxeType.BIG, ToolCondition.SHARP));
+        axes.add(new Axe("Большой топор №2", AxeType.BIG, ToolCondition.SHARP));
+        axes.add(new Axe("Большой топор №3", AxeType.BIG, ToolCondition.SHARP));
+        return axes;
+    }
+
+    public static ArrayList<Axe> createManySmallTradeAxes() {
+        ArrayList<Axe> axes = new ArrayList<>();
+        axes.add(new Axe("Маленький торговый топор №1", AxeType.SMALL, ToolCondition.SHARP));
+        axes.add(new Axe("Маленький торговый топор №2", AxeType.SMALL, ToolCondition.SHARP));
+        return axes;
+    }
+}
