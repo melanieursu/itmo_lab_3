@@ -1,0 +1,19 @@
+package items;
+
+import enums.ToolCondition;
+
+public class ToolConditionException extends Exception {
+    public final String toolName;
+    public final ToolCondition condition;
+
+    public ToolConditionException(String message, String toolName, ToolCondition condition) {
+        super(message);
+        this.toolName = toolName;
+        this.condition = condition;
+    }
+
+    @Override
+    public String getMessage() {
+        return super.getMessage();
+    }
+}
