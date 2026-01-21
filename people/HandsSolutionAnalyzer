@@ -1,0 +1,14 @@
+package people;
+
+import items.FootOperatedMechanism;
+import items.Grindstone;
+
+public record HandsSolutionAnalyzer(RobinsonCrusoe robinson, Grindstone grindstone, FootOperatedMechanism solution) {
+
+    public String analyzeSolution() {
+        return "Анализ" +
+                " точило: " + grindstone +
+                ", приспособление: " + solution.handStatusAfterUse +
+                ", умственная энергия Робинзона: " + robinson.getMentalEnergySpent();
+    }
+}
