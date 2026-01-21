@@ -1,0 +1,11 @@
+package items;
+
+public class Usable {
+    public String use() throws ToolConditionException {
+        return null;
+    }
+
+    boolean canBeUsedWithOneHand() {
+        return false;
+    }
+}
